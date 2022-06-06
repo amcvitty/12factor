@@ -1,4 +1,5 @@
 ## VIII. Souběh
+
 ### Škálujte do šířky použitím proces modelu.
 
 Každý počítačový program se po spuštění prezentuje jako jeden nebo více procesů. Webové aplikace mají různé formy vykonávání procesů. Například PHP procesy běží jako potomci Apache procesu, spouštěné na požádání dle množství požadavků. Java procesy mají opačný přístup, kde JVM poskytuje jeden masivní super proces, který si po spuštění vyhradí velké množství systémovývh požadavků (CPU a paměti) a souběh si řídí interně pomocí vláken. V obou případech jsou běžící procesy jen málo viditelné pro vývojáře aplikace.
@@ -9,6 +10,6 @@ Každý počítačový program se po spuštění prezentuje jako jeden nebo víc
 
 To nevylučuje, že si jednotlivé procesy nemohou spravovat interní multiplexování přes vlákna nebo pomocí async/event modelu, jako je tomu v [EventMachine](https://github.com/eventmachine/eventmachine), [Twisted](http://twistedmatrix.com/trac/) nebo [Node.js](http://nodejs.org/). Jednotlivé VM však mohou růst jen omezeně (vertikální škálování), aplikace tedy musí být schopná i běhu v několika procesech na více fyzických strojích.
 
-Proces model obzvlášť vyniká, když přijde čas na škálování. [Nesdílená a horizontálně dělitelná podstata procesů twelve-factor aplikace](./processes) znamená, že přidání větší souběžnosti je jednoduchá a spolehlivá operace. Sada typu procesů a množství procesů každého typu se nazývá *formace procesů*.
+Proces model obzvlášť vyniká, když přijde čas na škálování. [Nesdílená a horizontálně dělitelná podstata procesů twelve-factor aplikace](./processes) znamená, že přidání větší souběžnosti je jednoduchá a spolehlivá operace. Sada typu procesů a množství procesů každého typu se nazývá _formace procesů_.
 
-Procesy twelve-factor aplikace by [nikdy neměly démonizovat](http://dustin.github.com/2010/02/28/running-processes.html) nebo zapisovat PID soubory. Namísto toho by se měly spoléhat na správce procesů operačního systému (jako je například [systemd](https://www.freedesktop.org/wiki/Software/systemd/), správce distribuovaných procesů na cloudové platformě nebo nástroje typu [Foreman](http://blog.daviddollar.org/2011/05/06/introducing-foreman.html) během vývoje), který obstará [výstupní proudy](./logs), reakci na havarované procesy a obsluhu uživatelem vyvolaných restartů a zastavení.
+Procesy twelve-factor aplikace by [nikdy neměly démonizovat](https://dustin.sallings.org/2010/02/28/running-processes.html) nebo zapisovat PID soubory. Namísto toho by se měly spoléhat na správce procesů operačního systému (jako je například [systemd](https://www.freedesktop.org/wiki/Software/systemd/), správce distribuovaných procesů na cloudové platformě nebo nástroje typu [Foreman](http://blog.daviddollar.org/2011/05/06/introducing-foreman.html) během vývoje), který obstará [výstupní proudy](./logs), reakci na havarované procesy a obsluhu uživatelem vyvolaných restartů a zastavení.
